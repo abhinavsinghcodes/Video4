@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falling Stars</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: radial-gradient(circle, #000, #001);
+            height: 100vh;
+        }
+
+        .star {
+            position: absolute;
+            top: -10px;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px white;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <script>
+        // Create multiple stars
+        function createStar() {
+            const star = document.createElement("div");
+            star.classList.add("star");
+            star.style.left = `${Math.random() * window.innerWidth}px`;
+            star.style.animationDuration = `${Math.random() * 5 + 2}s`; // Random fall speed
+            star.style.opacity = Math.random(); // Random brightness
+            document.body.appendChild(star);
+
+            // Remove the star once it finishes falling
+            star.addEventListener("animationend", () => {
+                star.remove();
+            });
+        }
+
+        // Continuously generate stars
+        setInterval(createStar, 100);
+
+    </script>
+</body>
+</html>
